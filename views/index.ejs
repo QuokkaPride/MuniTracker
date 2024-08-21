@@ -9,31 +9,28 @@
 </head>
 <body>
 
-    <div class="container my-3">
+    <div class="container my-0">
         <div class="p-4 text-center bg-body-tertiary rounded-3">
           <h1 class="text-body-emphasis">Taxable Muni Transaction Tracker</h1>
           <p class="col-lg-8 mx-auto fs-5 text-muted">
             The industry source for taxable muni deals
           </p>
-          <div class="d-inline-flex gap-2">
-            <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 " type="button">
-              View Deals
-            </button>
-            <button class="btn btn-outline-secondary btn-lg px-4 " type="button">
-              Submit Deal
-            </button>
+          <div class="mt-4">
+
+            <a href="#submitDealSection" class="btn btn-secondary btn-lg">Submit Deal</a>
           </div>
         </div>
       </div>
       
-      
+
       <% if (locals.editSubmission) { %>
         <ul style="list-style-type: none;">
             <li>
                 <%- include("partials/editDealForm.ejs", { editSubmission: editSubmission }) %>
             </li>
         </ul>
-      <% } else if (locals.submissions) { %>
+      <% } else if (locals.submissions && locals.submissions.length > 0 ) { %>
+        <div id="viewDealSection"><h1 class="text-center">View Deals</h1></div>
         <ul style="list-style-type: none;">
             <% submissions.forEach(submission => { %>
             <li>
@@ -43,7 +40,6 @@
         </ul>
         <%- include("partials/submitDealForm.ejs") %>
       <% } else { %>
-        <p> editSubmission and Submission not found</p>
         <%- include("partials/submitDealForm.ejs") %>
       <% } %>
 

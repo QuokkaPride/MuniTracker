@@ -1,4 +1,9 @@
-<div class="container col-lg-4 mx-auto my-5">
+<div class="container text-center">
+    <% if (locals.submissions && locals.submissions.length > 0) { %>
+        <a href="#viewDealSection" class="btn btn-secondary btn-lg mb-5">View Deals</a>
+    <% } %>
+</div>
+<div id="submitDealSection" class="container col-lg-4 mx-auto my-5">    
     <div><h1 class="text-center">Submit Deal</h1></div>
     <form id="submitDealForm" action="/submit" method="POST">
         <div class="mb-3">

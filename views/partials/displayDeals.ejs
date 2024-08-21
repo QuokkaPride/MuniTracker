@@ -1,11 +1,8 @@
 <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-2 align-items-center justify-content-center col-lg-4 mx-auto my-0">
-    <div class="list-group w-100"> <!-- Added w-100 class to make it wider -->
+    <div class="list-group w-100"> 
       <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
         <div class="d-block gap-2 justify-content-between">
-          <div>
-            <h6 class="mb-0">Obligor</h6>
-            <p class="mb-0 opacity-75"><%= submission.obligor %></p>
-          </div>
+
           <div>
             <h6 class="mb-0">Issue Amount</h6>
             <p class="mb-0 opacity-75"><%= submission.issueAmount %></p>
@@ -15,9 +12,11 @@
             <p class="mb-0 opacity-75"><%= submission.issueDate %></p>
           </div>
           <div>
-            <h6 class="mb-0">ID:</h6>
-            <p class="mb-0 opacity-75"><%= submission.id %></p>
+            <h6 class="mb-0">Obligor</h6>
+            <p class="mb-0 opacity-75"><%= submission.obligor %></p>
           </div>
+          <!-- Hide the ID -->
+          <input type="hidden" name="id" value="<%= submission.id %>">
           <!-- Add Edit and Delete buttons -->
           <div class="mt-3">
             <form action="/edit" method="GET" class="d-inline">
