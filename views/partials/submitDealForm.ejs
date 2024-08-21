@@ -1,0 +1,41 @@
+<div class="container col-lg-4 mx-auto my-5">
+    <div><h1 class="text-center">Submit Deal</h1></div>
+    <form action="/submit" method="POST">
+        <div class="mb-3">
+            <label for="issueAmount" class="form-label">Issue Amount $</label>
+            <input type="text" name="issueAmount" class="form-control" id="issueAmountInput" value="">
+        </div>
+        
+        <div class="mb-3">
+            <label for="issueDate" class="form-label">Issue Date</label>
+            <input type="text" name="issueDate" class="form-control" id="issueDateInput" value="" placeholder="mm/dd/yyyy">
+        </div>
+        
+        <div class="mb-3">
+            <label for="obligor" class="form-label">Obligor</label>
+            <input type="text" name="obligor" class="form-control" id="obligorInput" value="">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<script>
+    document.getElementById('issueAmountInput').addEventListener('input', function(event) {
+        let value = event.target.value.replace(/[^0-9]/g, '');
+        if (value) {
+            value = (parseFloat(value) / 100).toFixed(2); // Treat input as cents
+            value = '$' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas
+        }
+        event.target.value = value;
+    });
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const issueDateInput = document.getElementById('issueDateInput').value;
+        const datePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
+
+        if (!datePattern.test(issueDateInput)) {
+            event.preventDefault();
+            alert('Please enter the date in the format mm/dd/yyyy');
+        }
+    });
+</script>
