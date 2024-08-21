@@ -3,24 +3,24 @@
     <form action="/submit" method="POST">
         <div class="mb-3">
             <label for="issueAmount" class="form-label">Issue Amount $</label>
-            <input type="text" name="issueAmount" class="form-control" id="issueAmountInput" value="">
+            <input type="text" name="issueAmount" class="form-control" id="issueAmount" value="">
         </div>
         
         <div class="mb-3">
             <label for="issueDate" class="form-label">Issue Date</label>
-            <input type="text" name="issueDate" class="form-control" id="issueDateInput" value="" placeholder="mm/dd/yyyy">
+            <input type="text" name="issueDate" class="form-control" id="issueDate" value="" placeholder="mm/dd/yyyy">
         </div>
         
         <div class="mb-3">
             <label for="obligor" class="form-label">Obligor</label>
-            <input type="text" name="obligor" class="form-control" id="obligorInput" value="">
+            <input type="text" name= "obligor" class="form-control" id="obligor" value="">
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 <script>
-    document.getElementById('issueAmountInput').addEventListener('input', function(event) {
+    document.getElementById('issueAmount').addEventListener('input', function(event) {
         let value = event.target.value.replace(/[^0-9]/g, '');
         if (value) {
             value = (parseFloat(value) / 100).toFixed(2); // Treat input as cents
@@ -29,8 +29,19 @@
         event.target.value = value;
     });
 
+    document.getElementById('issueDate').addEventListener('input', function(event) {
+        let value = event.target.value.replace(/\D/g, '');
+        if (value.length > 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2);
+        }
+        if (value.length > 5) {
+            value = value.slice(0, 5) + '/' + value.slice(5);
+        }
+        event.target.value = value;
+    });
+
     document.querySelector('form').addEventListener('submit', function(event) {
-        const issueDateInput = document.getElementById('issueDateInput').value;
+        const issueDateInput = document.getElementById('issueDate').value;
         const datePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
 
         if (!datePattern.test(issueDateInput)) {
