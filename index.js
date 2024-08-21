@@ -30,7 +30,7 @@ app.post("/submit", (req, res) => {
     
     // Add the new submission to the array
     submissions.push({ issueAmount, issueDate, obligor, id });
-
+    console.table(submissions);
 
     // Render the page with all submissions
     res.render("index.ejs", { 
@@ -41,45 +41,34 @@ app.post("/submit", (req, res) => {
 
 // delete route 
 app.post('/delete', (req, res) => {
-    let id = Number(req.body.id.trim()); // Convert to number after trimming
+    let id = Number(req.body.id); // Convert to number. form data come in as strings.
     console.table(submissions);
-    console.log(`ID to delete: '${id}' (Type: ${typeof id})`);
+    console.log(`target id: '${id}'`);
 
-    // Find the index of the submission with the given id
-    const index = submissions.findIndex(submission => submission.id === id);
-    console.log(`Position of item with id '${id}' is: ${index}`);
-    
-    if (index !== -1) {
-        submissions = submissions.filter(submission => submission.id !== id); 
-        console.log(`Deleted item with id: '${id}'`);
-    } else {
-        console.log(`Item with id '${id}' not found.`);
-    }
-    
+    submissions = submissions.filter(submission => submission.id !== id); 
+    console.log(`Deleted item with id: '${id}'`);
     console.table(submissions);
     
     // Render the page with all submissions
-    res.render("index.ejs", { 
-        submissions: submissions
-    });
+    res.redirect('/');
 });
 
 
 // Add the edit route
 app.get('/edit', (req, res) => {
-    const id = req.query.id;
-    const submission = submissions.find(sub => sub.id == id);
+    let id = Number(req.query.id);
+    let editSubmission = submissions.find(sub => sub.id == id);
     res.render('index.ejs', { 
-        submission: submission
+        editSubmission: editSubmission
     });
 });
 
 // Add the update route
 app.post('/update', (req, res) => {
-    const id = req.body.id;
-    const issueAmount = req.body.issueAmount;
-    const issueDate = req.body.issueDate;
-    const obligor = req.body.obligor;
+    let id = Number(req.body.id);
+    let issueAmount = req.body.issueAmount;
+    let issueDate = req.body.issueDate;
+    let obligor = req.body.obligor;
 
     const submissionIndex = submissions.findIndex(sub => sub.id == id);
     if (submissionIndex !== -1) {

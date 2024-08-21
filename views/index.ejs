@@ -25,24 +25,32 @@
           </div>
         </div>
       </div>
-    <% if (locals.submissions) { %>
+      
+      
+      <% if (locals.editSubmission) { %>
+        <ul style="list-style-type: none;">
+            <li>
+                <%- include("partials/editDealForm.ejs", { editSubmission: editSubmission }) %>
+            </li>
+        </ul>
+      <% } else if (locals.submissions) { %>
         <ul style="list-style-type: none;">
             <% submissions.forEach(submission => { %>
             <li>
-                <%- include("partials/displayDeals.ejs", { submission: submission }) %>    
+                <%- include("partials/displayDeals.ejs", { submission: submission }) %>
             </li>
-            <% }); %> 
+            <% }); %>
         </ul>
-
-            <%- include("partials/submitDealForm.ejs") %>
-
-        <% } else { %>
-
-            <%- include("partials/submitDealForm.ejs") %>
-
-    <% } %>
+        <%- include("partials/submitDealForm.ejs") %>
+      <% } else { %>
+        <p> editSubmission and Submission not found</p>
+        <%- include("partials/submitDealForm.ejs") %>
+      <% } %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- include script to format and restrict input to forms         -->
+    <%- include("partials/formatInputs.ejs") %> 
 
 </body>
 </html>

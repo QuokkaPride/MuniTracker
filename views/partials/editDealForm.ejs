@@ -1,19 +1,19 @@
 <div class="container col-lg-4 mx-auto my-5">
-    <div><h1 class="text-center">Submit Deal</h1></div>
-    <form id="submitDealForm" action="/submit" method="POST">
+    <div><h1 class="text-center">Edit Deal</h1></div>
+    <form id="submitDealForm" action="/update" method="POST">
         <div class="mb-3">
             <label for="issueAmount" class="form-label">Issue Amount $</label>
-            <input type="text" name="issueAmount" class="form-control" id="issueAmount" value="">
+            <input type="text" name="issueAmount" class="form-control" id="issueAmount" value="<%= editSubmission.issueAmount %>">
         </div>
         
         <div class="mb-3">
             <label for="issueDate" class="form-label">Issue Date</label>
-            <input type="text" name="issueDate" class="form-control" id="issueDate" value="" placeholder="mm/dd/yyyy">
+            <input type="text" name="issueDate" class="form-control" id="issueDate" value="<%= editSubmission.issueDate %>" placeholder="mm/dd/yyyy">
         </div>
         
         <div class="mb-3">
             <label for="obligor" class="form-label">Obligor</label>
-            <input type="text" name= "obligor" class="form-control" id="obligor" value="">
+            <input type="text" name= "obligor" class="form-control" id="obligor" value="<%= editSubmission.obligor %>">
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

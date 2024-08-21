@@ -1,0 +1,37 @@
+<script>
+    //nice formatting for $ input
+    document.getElementById('issueAmount').addEventListener('input', function(event) {
+        let value = event.target.value.replace(/[^0-9]/g, '');
+        if (value) {
+            value = (parseFloat(value) / 100).toFixed(2); // Treat input as cents
+            value = '$' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas
+        }
+        event.target.value = value;
+    });
+
+    //nice formatting for issueDate
+    document.getElementById('issueDate').addEventListener('input', function(event) {
+        let value = event.target.value.replace(/\D/g, '');
+        if (value.length > 8) {
+            value = value.slice(0, 8); // Limit to 8 characters
+        }
+        if (value.length > 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2);
+        }
+        if (value.length > 5) {
+            value = value.slice(0, 5) + '/' + value.slice(5);
+        }
+        event.target.value = value;
+    });
+
+    //nice formatting for issuedate
+    document.getElementById('submitDealForm').addEventListener('submit', function(event) {
+        const issueDateInput = document.getElementById('issueDate').value;
+        const datePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
+
+        if (!datePattern.test(issueDateInput)) {
+            event.preventDefault();
+            alert('Please enter the date in the format mm/dd/yyyy');
+        }
+    });
+</script>
