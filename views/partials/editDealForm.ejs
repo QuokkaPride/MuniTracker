@@ -1,6 +1,6 @@
 <div class="container col-lg-4 mx-auto my-5">
     <div><h1 class="text-center">Edit Deal</h1></div>
-    <form id="submitDealForm" action="/update" method="POST">
+    <form id="updateDealForm" action="/update" method="POST">
         <div class="mb-3">
             <label for="issueAmount" class="form-label">Issue Amount $</label>
             <input type="text" name="issueAmount" class="form-control" id="issueAmount" value="<%= editSubmission.issueAmount %>">
@@ -15,8 +15,8 @@
             <label for="obligor" class="form-label">Obligor</label>
             <input type="text" name= "obligor" class="form-control" id="obligor" value="<%= editSubmission.obligor %>">
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="hidden" name="id" value="<%= editSubmission.id %>">
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
 
